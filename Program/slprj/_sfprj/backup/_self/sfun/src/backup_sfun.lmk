@@ -1,0 +1,38 @@
+CC     = "C:\Program Files\MATLAB\R2014a\sys\lcc64\lcc64\bin\lcc64.exe"
+LD     = "C:\Program Files\MATLAB\R2014a\sys\lcc64\lcc64\bin\lcclnk64.exe"
+LIBCMD = "C:\Program Files\MATLAB\R2014a\sys\lcc64\lcc64\bin\lcclib64.exe"
+CFLAGS = -dll -noregistrylookup  -c -Zp8 -DLCC_WIN64 -DMATLAB_MEX_FILE -DMX_COMPAT_32 -nodeclspec 
+LDFLAGS = -s -dll -L"C:\Program Files\MATLAB\R2014a\sys\lcc64\lcc64\lib64" -entry LibMain -map sfun.map 
+LIBFLAGS = 
+
+OBJECTS = \
+	"backup_sfun.obj"\
+	"c2_backup.obj"\
+	"backup_sfun_registry.obj"\
+	"lccstub.obj"\
+	"backup_sfun.def"\
+	"C:\Program Files\MATLAB\R2014a\extern\lib\win64\microsoft\sf_runtime.lib"\
+	"C:\Program Files\MATLAB\R2014a\extern\lib\win64\microsoft\libmwblas.lib"\
+	"C:\Program Files\MATLAB\R2014a\extern\lib\win64\microsoft\libmx.lib"\
+	"C:\Program Files\MATLAB\R2014a\extern\lib\win64\microsoft\libmex.lib"\
+	"C:\Program Files\MATLAB\R2014a\extern\lib\win64\microsoft\libmat.lib"\
+	"C:\Program Files\MATLAB\R2014a\extern\lib\win64\microsoft\libfixedpoint.lib"\
+	"C:\Program Files\MATLAB\R2014a\extern\lib\win64\microsoft\libut.lib"\
+	"C:\Program Files\MATLAB\R2014a\extern\lib\win64\microsoft\libmwmathutil.lib"\
+	"C:\Program Files\MATLAB\R2014a\extern\lib\win64\microsoft\libemlrt.lib"\
+	"C:\Program Files\MATLAB\R2014a\extern\lib\win64\microsoft\libmwsl_log_load_blocks.lib"\
+	"C:\Program Files\MATLAB\R2014a\lib\win64\libippmwipt.lib"\
+
+INCLUDE_PATH= -I"C:\Program Files\MATLAB\R2014a\sys\lcc64\lcc64\include64"  -I"C:\Program Files\MATLAB\R2014a\extern\include"  -I"C:\Program Files\MATLAB\R2014a\simulink\include"  -I"C:\Program Files\MATLAB\R2014a\stateflow\c\mex\include"  -I"C:\Program Files\MATLAB\R2014a\rtw\c\src"  -I"D:\MyFile\学习资料\机器人导论\移动机器人仿真\A star alogrithm\IntroToRobo\slprj\_sfprj\backup\_self\sfun\src" 
+ 
+
+backup_sfun.mexw64 : $(MAKEFILE) $(OBJECTS)
+	$(LD) $(LDFLAGS) -o backup_sfun.mexw64 @backup_sfun.lmko
+backup_sfun.obj :	"backup_sfun.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "backup_sfun.c"
+c2_backup.obj :	"c2_backup.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c2_backup.c"
+backup_sfun_registry.obj :	"backup_sfun_registry.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "backup_sfun_registry.c"
+lccstub.obj :	"C:\Program Files\MATLAB\R2014a\sys\lcc64\lcc64\mex\lccstub.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "C:\Program Files\MATLAB\R2014a\sys\lcc64\lcc64\mex\lccstub.c"
